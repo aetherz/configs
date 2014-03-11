@@ -1,3 +1,8 @@
+set nocompatible
+
+" Change <Leader> to ,
+let mapleader = ","
+
 " Dvorak Movement Keys. g means go by screen (not physical) line
 noremap h h
 noremap t gj
@@ -44,6 +49,10 @@ set tabpagemax=50
 noremap <C-h> gT
 noremap <C-s> gt
 
+" Go backwards and forwards in jumplist
+noremap <C-b> <C-o>
+noremap <C-m> <C-i>
+
 " Buffer management
 set switchbuf=usetab,newtab
 
@@ -57,17 +66,14 @@ set nu
 " Turn autoindent on
 set ai
 
-" Set up file-type dependent indent
-filetype indent on
-
 " Turn syntax highlighting on
 syntax on
 
 " Configure tab behavior
 set smartindent
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 
 " Search tweaks
@@ -101,7 +107,7 @@ noremap ; :
 noremap <C-a> :set spell! spell?<CR>
 noremap <C-j> [s
 noremap <C-k> ]s
-noremap <C-b> z=
+noremap <C-x> z=
 
 " Press Space to turn off highlighting and clear any message already displayed.
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
@@ -109,14 +115,17 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 " Make man page appear in a vim window using :Man command
 runtime! ftplugin/man.vim
 
+" Sudo write current file
+cmap W w !sudo tee >/dev/null %
+
 " Compile current file
-noremap , :!pdflatex %<CR>
+"noremap , :!pdflatex %<CR>
 
 " Open pdf of current file
-noremap \ :!open %<.pdf<CR>
+"noremap \ :!open %<.pdf<CR>
 
 " Show status line at the bottom of the screen
-set ruler
+"set ruler
 set rulerformat=%50(%=%n\:%f%m%r%w\ %l,%c%V\ %P%)
 
 " Correct vimdiff color scheme when using dark background
@@ -143,8 +152,8 @@ hi SpellBad ctermbg=NONE cterm=reverse
 hi MatchParen ctermbg=black cterm=None
 
 " Fix the omni complete menu color
-hi Pmenu ctermbg=black
-hi PmenuSel ctermbg=None cterm=reverse
+"hi Pmenu ctermbg=black
+"hi PmenuSel ctermbg=None cterm=reverse
 
 " Show the command that you're currently typing
 " set showcmd
@@ -159,3 +168,45 @@ let g:NERDTreeMapOpenExpl='~'
 
 let g:NERDTreeDirArrows=0
 let g:NERDTreeMinimalUI=1
+
+" Make Command-T open file in a new tab by default
+let g:CommandTAcceptSelectionMap = '<C-t>'
+let g:CommandTAcceptSelectionTabMap = '<CR>'
+
+" Set up file-type dependent indent
+filetype indent on
+
+
+""""""""""""""""""""""""""""""""
+" Following required for Vundle (required for YouCompleteMe)
+""""""""""""""""""""""""""""""""
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+Bundle 'Valloric/YouCompleteMe'
+
+filetype plugin indent on
+""""""""""""""""""""""""""""""""
+" End Vundle section.
+""""""""""""""""""""""""""""""""
+
+" YouCompleteMe flags default location for C-family completion via Clang
+let g:ycm_global_ycm_extra_conf = '~/object-tracking/src/.ycm_extra_conf.py'
+
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_confirm_extra_conf = 1
+set completeopt-=preview
+
+" Do not display "Pattern not found" messages during YouCompleteMe completion
+" " Patch: https://groups.google.com/forum/#!topic/vim_dev/WeBBjkXE8H8
+try
+  set shortmess+=c
+  catch /E539: Illegal character/
+endtry
+
+
+" End YouCompleteMe
