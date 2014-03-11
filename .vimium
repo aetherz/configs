@@ -1,4 +1,4 @@
-# Custom key maps
+# -------------------- Custom key maps -------------------------------
 map t scrollDown
 map T scrollFullPageDown
 map n scrollUp
@@ -31,6 +31,5 @@ map - goNext
 map _ goPrevious
 
 
-# ------------------------------------------------------------------
-# Characters used for link hints
+# ---------- Characters used for link hints -------------------------
 # abcdfghijklmnopqrstvwxyz',.-;
