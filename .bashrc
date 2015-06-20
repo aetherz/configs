@@ -221,6 +221,9 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-source ~/.bashrc_google
-
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+if [ -f ~/.bashrc_google ]; then
+  source ~/.bashrc_google
+fi
+
