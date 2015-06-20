@@ -9,7 +9,11 @@ elif [ "$(uname)" == "Darwin" ]; then
   export MAC=true
 fi
 
+# Use vim for everything
+export VISUAL=vim
+export EDITOR="$VISUAL"
 alias v="vim"
+alias vi="vim"
 
 # disable XON/OFF
 stty -ixon

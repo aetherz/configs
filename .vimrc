@@ -455,3 +455,8 @@ vmap <silent> <expr> p <sid>Repl()
 if (atgoogle)
   source ~/.vimrc_google
 endif
+
+if filereadable(glob('~/.vimrc_local'))
+  source ~/.vimrc_local
+endif
+
