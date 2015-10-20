@@ -269,19 +269,6 @@ function! XTermPasteBegin()
   return ""
 endfunction
 
-" Make Command-T open file in a new tab by default
-"let g:CommandTAcceptSelectionMap = '<CR>'
-"nnoremap <silent> <Leader>o :CommandT<CR>
-
-" Unbind open selection in tab.
-let g:CommandTAcceptSelectionTabMap = ''
-
-" Make Command-t recursively search from the current directory rather than git
-" root
-let g:CommandTTraverseSCM="pwd"
-
-let g:CommandTFileScanner="find"
-
 
 " Open the corresponding .cc file from a .h file.
 noremap <Leader>c :edit %:p:s?\.h$?.cc?<CR>
@@ -337,7 +324,8 @@ Plugin 'rosenfeld/conque-term'
 Plugin 'bling/vim-airline'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
-Plugin 'wincent/command-t'
+"Plugin 'wincent/command-t'
+Plugin 'kien/ctrlp.vim'
 
 "Plugin 'fholgado/minibufexpl.vim'
 
@@ -377,6 +365,35 @@ endtry
 noremap <Leader>r :Dispatch ant debug && ./install_and_run.sh<CR>
 noremap <Leader>d :Dispatch
 "------ End vim-dispatch
+
+"------ Begin command-t
+" Make Command-T open file in a new tab by default
+"let g:CommandTAcceptSelectionMap = '<CR>'
+"nnoremap <silent> <Leader>o :CommandT<CR>
+
+" Unbind open selection in tab.
+let g:CommandTAcceptSelectionTabMap = ''
+
+" Make Command-t recursively search from the current directory rather than git
+" root
+let g:CommandTTraverseSCM="pwd"
+
+let g:CommandTFileScanner="find"
+"------ End command-t
+
+"------ Begin ctrl-p
+let g:ctrlp_map = '<Leader>t'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_user_command = 'find %s -type f'
+let g:ctrlp_working_path_mode = ''
+
+let g:ctrlp_prompt_mappings = {
+    \ 'PrtSelectMove("j")':   ['<c-j>', '<c-n>'],
+    \ 'PrtSelectMove("k")':   ['<c-k>', '<c-p>'],
+    \ 'PrtHistory(-1)':       ['<c-i>'],
+    \ 'PrtHistory(1)':        ['<c-r>'],
+    \ }
+"------ End ctrl-p
 
 "------ Begin QuickFix Enter
 let g:qfenter_topen_map = ['<C-t>']
